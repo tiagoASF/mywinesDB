@@ -45,6 +45,20 @@ GO
 USE mywinesDB
 GO
 
+-- view para listar as localidades, unindo pais, regiao e subregiao
+CREATE OR ALTER VIEW vw_location AS
+    SELECT 
+        subregion.subregion_name AS 'Subregiao',
+        region.region_name AS 'Regiao',
+        country.country_name AS 'Pais'
+    FROM 
+        subregion
+    FULL JOIN region ON subregion.region_id = region.id
+    FULL JOIN country ON region.country_id = country.id
+GO
+
+
+-- view para listar as garrafas ja registradas
 CREATE OR ALTER VIEW vw_list_wine_bottles
 AS
     SELECT 
@@ -66,12 +80,12 @@ AS
         profile.id AS 'Perfil'
 
     FROM wine_bottle
-        INNER JOIN [style] ON wine_bottle.style_id = style.id
-        INNER JOIN [country] ON wine_bottle.country_id = country.id
-        INNER JOIN [region] ON wine_bottle.region_id = region.id
-        INNER JOIN [subregion] ON wine_bottle.subregion_id = subregion.id
-        INNER JOIN [variety] ON wine_bottle.variety_id = variety.id
-        INNER JOIN [winery] ON wine_bottle.winery_id = winery.id
-        INNER JOIN [storage_condition] ON wine_bottle.storage_condition_id = storage_condition.id
-        INNER JOIN [profile] ON wine_bottle.profile_id = profile.id
+        LEFT JOIN style ON wine_bottle.style_id = style.id
+        LEFT JOIN country ON wine_bottle.country_id = country.id
+        LEFT JOIN region ON wine_bottle.region_id = region.id
+        LEFT JOIN subregion ON wine_bottle.subregion_id = subregion.id
+        LEFT JOIN variety ON wine_bottle.variety_id = variety.id
+        LEFT JOIN winery ON wine_bottle.winery_id = winery.id
+        LEFT JOIN storage_condition ON wine_bottle.storage_condition_id = storage_condition.id
+        LEFT JOIN profile ON wine_bottle.profile_id = profile.id
 GO
