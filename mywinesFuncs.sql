@@ -1,7 +1,7 @@
 ------------------------------------------------- STORED PROCEDURES -----------------------------------------
 
 -- 1.INSERTING A BOTTLE
-CREATE PROCEDURE sp_insert_wine_bottle (@bottleName NVARCHAR(100),
+CREATE PROCEDURE sp_insert_bottle (@bottleName NVARCHAR(100),
                                         @vintageDate SMALLINT,
                                         @price DECIMAL,
                                         @purchaseDate DATE,
@@ -46,7 +46,7 @@ USE mywinesDB
 GO
 
 -- view para listar as localidades, unindo pais, regiao e subregiao
-CREATE OR ALTER VIEW vw_location AS
+CREATE OR ALTER VIEW vw_locations AS
     SELECT 
         subregion.subregion_name AS 'Subregiao',
         region.region_name AS 'Regiao',
@@ -59,7 +59,7 @@ GO
 
 
 -- view para listar as garrafas ja registradas
-CREATE OR ALTER VIEW vw_list_wine_bottles
+CREATE OR ALTER VIEW vw_list_bottles
 AS
     SELECT 
         wine_bottle.bottle_name AS 'Vinho',
