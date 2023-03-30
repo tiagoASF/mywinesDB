@@ -9,10 +9,8 @@ GO
 CREATE TABLE style
 (
     id TINYINT NOT NULL IDENTITY(1,1),
-    style_code TINYINT NOT NULL,
     style_name NVARCHAR(20) NOT NULL,
-    CONSTRAINT pk_style PRIMARY KEY(id),
-    CONSTRAINT uc_styleCode UNIQUE (style_code)
+    CONSTRAINT pk_style PRIMARY KEY(id)
 );
 CREATE NONCLUSTERED INDEX ix_style_name ON style(style_name)
 GO
@@ -20,11 +18,9 @@ GO
 CREATE TABLE country
 (
     id TINYINT NOT NULL IDENTITY(1,1),
-    country_code TINYINT NOT NULL,
     country_name NVARCHAR(20) NOT NULL,
     CONSTRAINT pk_country PRIMARY KEY(id),
-    CONSTRAINT uc_country_name UNIQUE(country_name),
-    CONSTRAINT uc_country_code UNIQUE(country_code)
+    CONSTRAINT uc_country_name UNIQUE(country_name)
 )
 CREATE NONCLUSTERED INDEX ix_country_name ON country(country_name)
 GO
@@ -33,13 +29,11 @@ GO
 CREATE TABLE region
 (
     id TINYINT NOT NULL IDENTITY(1,1),
-    region_code INT NOT NULL,
     region_name NVARCHAR(50) NOT NULL,
     country_id TINYINT NOT NULL,
     CONSTRAINT pk_region PRIMARY KEY(id),
     CONSTRAINT fk_region_country FOREIGN KEY(country_id)
         REFERENCES country(id),
-    CONSTRAINT uc_region_code UNIQUE(region_code)
 );
 CREATE NONCLUSTERED INDEX ix_region_name ON region(region_name);
 GO
@@ -47,14 +41,12 @@ GO
 CREATE TABLE subregion
 (
     id TINYINT NOT NULL IDENTITY(1,1),
-    subregion_code TINYINT NOT NULL,
     subregion_name NVARCHAR(50) NOT NULL,
     region_id TINYINT NOT NULL,
     CONSTRAINT pk_subregion PRIMARY KEY(id),
     CONSTRAINT fk_subregion_region FOREIGN KEY(region_id)
         REFERENCES region(id),
     CONSTRAINT uc_subregion_name UNIQUE(subregion_name),
-    CONSTRAINT uc_subregion_code UNIQUE(subregion_code)
 );
 CREATE NONCLUSTERED INDEX ix_subregion_name ON subregion(subregion_name)
 GO
@@ -82,7 +74,6 @@ GO
 CREATE TABLE storage_condition
 (
     id TINYINT NOT NULL IDENTITY(1,1),
-    storage_code TINYINT NOT NULL,
     storage_name NVARCHAR(20) NOT NULL,
     CONSTRAINT pk_storage_condition PRIMARY KEY(id),
     CONSTRAINT uc_storage_name UNIQUE(storage_name)
@@ -93,7 +84,6 @@ GO
 CREATE TABLE variety
 (
     id TINYINT NOT NULL IDENTITY(1,1),
-    variety_code TINYINT NOT NULL,
     variety_name NVARCHAR(50) NOT NULL,
     CONSTRAINT pk_variety PRIMARY KEY(id),
     CONSTRAINT uc_variety_name UNIQUE(variety_name)
@@ -125,13 +115,13 @@ CREATE TABLE wine_bottle
     score TINYINT CHECK (score >= 1 AND score <= 10),
     isFavorite BIT DEFAULT 0,
     style_id TINYINT NOT NULL,
-    country_id TINYINT NOT NULL,
-    region_id TINYINT,
-    subregion_id TINYINT,
     variety_id TINYINT NOT NULL,
     winery_id INT NOT NULL,
     storage_condition_id TINYINT NOT NULL,
     profile_id INT,
+    country_id TINYINT NOT NULL,
+    region_id TINYINT,
+    subregion_id TINYINT,
 
     CONSTRAINT pk_wine_bottle PRIMARY KEY(id),
 
