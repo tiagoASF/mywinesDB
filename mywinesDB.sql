@@ -99,9 +99,11 @@ CREATE TABLE profile
     tannin TINYINT NOT NULL CHECK(tannin >= 1 AND tannin <=5),
     acidy TINYINT NOT NULL CHECK(acidy >= 1 AND acidy <=5),
     alcohol TINYINT NOT NULL CHECK(alcohol >= 1 AND alcohol <=5),
+    comments NVARCHAR(max),
     CONSTRAINT pk_profile PRIMARY KEY(id)
 )
 GO
+
 
 CREATE TABLE wine_bottle
 (   
@@ -152,7 +154,6 @@ CREATE TABLE wine_bottle
 )
 CREATE NONCLUSTERED INDEX ix_bottle_score ON wine_bottle(score)
 GO
-
 
 
 
