@@ -30,10 +30,7 @@ CREATE TABLE region
 (
     id TINYINT NOT NULL IDENTITY(1,1),
     region_name NVARCHAR(50) NOT NULL,
-    country_id TINYINT NOT NULL,
-    CONSTRAINT pk_region PRIMARY KEY(id),
-    CONSTRAINT fk_region_country FOREIGN KEY(country_id)
-        REFERENCES country(id),
+    CONSTRAINT pk_region PRIMARY KEY(id)
 );
 CREATE NONCLUSTERED INDEX ix_region_name ON region(region_name);
 GO
@@ -42,24 +39,28 @@ CREATE TABLE subregion
 (
     id TINYINT NOT NULL IDENTITY(1,1),
     subregion_name NVARCHAR(50) NOT NULL,
-    region_id TINYINT NOT NULL,
     CONSTRAINT pk_subregion PRIMARY KEY(id),
-    CONSTRAINT fk_subregion_region FOREIGN KEY(region_id)
-        REFERENCES region(id),
-    CONSTRAINT uc_subregion_name UNIQUE(subregion_name),
+    CONSTRAINT uc_subregion_name UNIQUE(subregion_name)
 );
 CREATE NONCLUSTERED INDEX ix_subregion_name ON subregion(subregion_name)
 GO
 
--- Tabela denormalizada para facilitar buscas (criar posteriormente)
--- CREATE TABLE location
--- (
---     country_code TINYINT NOT NULL,
---     region_code TINYINT,
---     subregion_code TINYINT
---     CONSTRAINT composite_key_location PRIMARY KEY(country_code, region_code, subregion_code),    
--- )
--- GO
+
+CREATE TABLE location
+(
+    id INT NOT NULL IDENTITY(1,1),
+    country_id TINYINT NOT NULL,
+    region_id TINYINT,
+    subregion_id TINYINT,
+    CONSTRAINT pk_location PRIMARY KEY(id),
+    CONSTRAINT fk_location_country FOREIGN KEY(country_id)
+        REFERENCES country(id),
+    CONSTRAINT fk_location_region FOREIGN KEY(region_id)
+        REFERENCES region(id),
+    CONSTRAINT fk_location_subregion FOREIGN KEY(subregion_id)
+        REFERENCES subregion(id)
+)
+
 
 CREATE TABLE winery
 (
