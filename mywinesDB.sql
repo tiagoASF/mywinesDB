@@ -60,6 +60,7 @@ CREATE TABLE location
     CONSTRAINT fk_location_subregion FOREIGN KEY(subregion_id)
         REFERENCES subregion(id)
 )
+GO
 
 
 CREATE TABLE winery
@@ -105,7 +106,6 @@ CREATE TABLE profile
 )
 GO
 
-
 CREATE TABLE wine_bottle
 (   
     id INT NOT NULL IDENTITY(1,1),
@@ -122,23 +122,15 @@ CREATE TABLE wine_bottle
     winery_id INT NOT NULL,
     storage_condition_id TINYINT NOT NULL,
     profile_id INT,
-    country_id TINYINT NOT NULL,
-    region_id TINYINT,
-    subregion_id TINYINT,
+    location_id INT NOT NULL,
 
     CONSTRAINT pk_wine_bottle PRIMARY KEY(id),
 
     CONSTRAINT fk_bottle_style FOREIGN KEY(style_id)
         REFERENCES style(id),
 
-    CONSTRAINT fk_bottle_country FOREIGN KEY(country_id)
-        REFERENCES country(id),
-
-    CONSTRAINT fk_bottle_region FOREIGN KEY(region_id)
-        REFERENCES region(id),
-
-    CONSTRAINT fk_bottle_subregion FOREIGN KEY(subregion_id)
-        REFERENCES subregion(id),
+    CONSTRAINT fk_bottle_location FOREIGN KEY(location_id)
+        REFERENCES location(id),
     
     CONSTRAINT fk_bottle_variety FOREIGN KEY(variety_id)
         REFERENCES variety(id),
@@ -150,8 +142,7 @@ CREATE TABLE wine_bottle
         REFERENCES storage_condition(id),
     
     CONSTRAINT fk_bottle_profile FOREIGN KEY(profile_id)
-        REFERENCES profile(id),
-    
+        REFERENCES profile(id)   
 )
 CREATE NONCLUSTERED INDEX ix_bottle_score ON wine_bottle(score)
 GO
