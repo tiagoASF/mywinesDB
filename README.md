@@ -34,9 +34,15 @@ O projeto tem como finalidade a implementação de um banco de dados publicado n
 * Azure Storage
 
 	<br />
-	<br />
-	<br />
+	
+	<figure style="align-items:center;">
+		<img src="https://github.com/tiagoASF/mywinesDB/blob/main/docs/mywinesDB.svg" alt="Logo" width="700" height="500">
+	</figure>
 
+<br />
+<br />
+<br />
+	
 	
 <h3 align="center"> 
 	🚧  Banco em construção...  🚧
