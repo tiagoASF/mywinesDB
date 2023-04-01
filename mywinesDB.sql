@@ -15,6 +15,36 @@ CREATE TABLE style
 CREATE NONCLUSTERED INDEX ix_style_name ON style(style_name)
 GO
 
+CREATE TABLE winery
+(
+    id INT NOT NULL IDENTITY(1,1),
+    winery_name NVARCHAR(100) NOT NULL,
+    CONSTRAINT pk_winery PRIMARY KEY(id),
+    CONSTRAINT uc_winery_name UNIQUE(winery_name)
+)
+CREATE NONCLUSTERED INDEX ix_winery_name ON winery(winery_name)
+GO
+
+CREATE TABLE storage_condition
+(
+    id TINYINT NOT NULL IDENTITY(1,1),
+    storage_name NVARCHAR(20) NOT NULL,
+    CONSTRAINT pk_storage_condition PRIMARY KEY(id),
+    CONSTRAINT uc_storage_name UNIQUE(storage_name)
+)
+CREATE NONCLUSTERED INDEX ix_storage_name ON storage_condition(storage_name)
+GO
+
+CREATE TABLE variety
+(
+    id TINYINT NOT NULL IDENTITY(1,1),
+    variety_name NVARCHAR(50) NOT NULL,
+    CONSTRAINT pk_variety PRIMARY KEY(id),
+    CONSTRAINT uc_variety_name UNIQUE(variety_name)
+)
+CREATE NONCLUSTERED INDEX ix_variety_name ON variety(variety_name)
+GO
+
 CREATE TABLE country
 (
     id TINYINT NOT NULL IDENTITY(1,1),
@@ -63,35 +93,6 @@ CREATE TABLE location
 GO
 
 
-CREATE TABLE winery
-(
-    id INT NOT NULL IDENTITY(1,1),
-    winery_name NVARCHAR(100) NOT NULL,
-    CONSTRAINT pk_winery PRIMARY KEY(id),
-    CONSTRAINT uc_winery_name UNIQUE(winery_name)
-)
-CREATE NONCLUSTERED INDEX ix_winery_name ON winery(winery_name)
-GO
-
-CREATE TABLE storage_condition
-(
-    id TINYINT NOT NULL IDENTITY(1,1),
-    storage_name NVARCHAR(20) NOT NULL,
-    CONSTRAINT pk_storage_condition PRIMARY KEY(id),
-    CONSTRAINT uc_storage_name UNIQUE(storage_name)
-)
-CREATE NONCLUSTERED INDEX ix_storage_name ON storage_condition(storage_name)
-GO
-
-CREATE TABLE variety
-(
-    id TINYINT NOT NULL IDENTITY(1,1),
-    variety_name NVARCHAR(50) NOT NULL,
-    CONSTRAINT pk_variety PRIMARY KEY(id),
-    CONSTRAINT uc_variety_name UNIQUE(variety_name)
-)
-CREATE NONCLUSTERED INDEX ix_variety_name ON variety(variety_name)
-GO
 
 CREATE TABLE profile
 (

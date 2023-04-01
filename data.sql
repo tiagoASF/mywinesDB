@@ -163,7 +163,8 @@ INSERT INTO region (region_name)
             ('Niederosterreich'),
             ('Burgenland'),
             ('Steiermark'),
-            ('Wien')
+            ('Wien'),
+            ('Western Cape')
 GO
 
 INSERT INTO subregion (subregion_name)
@@ -271,3 +272,38 @@ INSERT INTO variety (variety_name)
             ('Porto'),
             ('Xerez')
 GO
+
+
+INSERT INTO winery VALUES ('African Pride Wines')
+
+
+INSERT INTO profile VALUES(4,2,1,3,2, 'Vinho ligeiro, com uma leve salinidade, mas um ponto leve de amargor')
+
+INSERT INTO location
+VALUES
+(
+    7,
+    133,
+    null
+)
+
+
+INSERT INTO wine_bottle
+VALUES  
+(
+    'Footprint Chardonnay',
+    2019,
+    49.99,
+    '2022-10-10',
+    '2023-03-31',
+    'Vinho simples, vale o valor promocional pago, mas nao o preco de tabela',
+    6,
+    0,
+    2, --branco
+    13, --chardonnay
+    1, --vinicola
+    2, --consumed
+    1, --profile id
+    1--location id
+)
+
