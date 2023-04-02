@@ -500,3 +500,26 @@ VALUES
 
 ---
 
+INSERT INTO profile VALUES (4,4,3,2,3, 'Vinho muito equilibrado e integrado') 
+
+INSERT INTO variety VALUES('Alicante Bouschet')
+
+INSERT INTO wine_bottle
+VALUES  
+(
+    'Alicante Bouschet', --nome
+    2018, --safra
+    205, --preco
+    '2022-12-11', --datacompra
+    '2023-03-03', --dataconsumo
+    null, --comentario
+    8, --nota
+    1, --preferido?
+    1, --tipo
+    49, --variedade
+    4, --vinicola
+    2, --consumed
+    4, --profile id
+    3 --location id
+)
+
