@@ -307,3 +307,89 @@ VALUES
     1--location id
 )
 
+
+--02 de abril de 2023
+INSERT INTO winery VALUES('Riccitelli')
+GO
+
+INSERT INTO profile VALUES(2, 4, 5, 3, 3, 'Tanico, e pouco frutado, fora da tipicidade da Malbec')
+
+INSERT INTO location VALUES(9, 105, 35)
+
+INSERT INTO wine_bottle
+VALUES  
+(
+    'This is not another lovely malbec',
+    2021,
+    99.90,
+    '2022-12-20',
+    '2023-03-10',
+    'Malbec fora do padrao esperado, pouco frutado e bastante tanico. Fermentacao realizada com grande parte dos cachos inteiros, e estagio em tanque de concreto',
+    7, --nota
+    0, --preferido?
+    1, --tipo
+    36, --variedade
+    2, --vinicola
+    2, --consumed
+    2, --profile id
+    2 --location id
+)
+
+---
+INSERT INTO winery VALUES('Casa Relvas')
+GO
+
+INSERT INTO location VALUES(4, 55, null)
+
+INSERT INTO wine_bottle
+VALUES  
+(
+    'Herdade de Sao Miguel',
+    2020,
+    89.99,
+    '2022-12-20',
+    null,
+    null,
+    null, --nota
+    null, --preferido?
+    1, --tipo
+    1, --variedade
+    3, --vinicola
+    1, --consumed
+    null, --profile id
+    2 --location id
+)
+
+UPDATE wine_bottle
+SET 
+    consumption_date = '2023-01-21',
+    score = 7,
+    isFavorite = 0,
+    storage_condition_id = 2,
+    location_id = 3
+WHERE id = 3
+
+---
+INSERT INTO winery VALUES('Herdade do Rocim')
+GO
+
+INSERT INTO location VALUES(4, 55, null)
+
+INSERT INTO wine_bottle
+VALUES  
+(
+    'Mariana', --nome
+    2020, --safra
+    69.98, --preco
+    '2022-12-20', --datacompra
+    '2023-01-27', --dataconsumo
+    null, --comentario
+    8, --nota
+    1, --preferido?
+    1, --tipo
+    1, --variedade
+    4, --vinicola
+    2, --consumed
+    null, --profile id
+    3 --location id
+)
