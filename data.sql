@@ -393,3 +393,110 @@ VALUES
     null, --profile id
     3 --location id
 )
+
+---
+INSERT INTO winery VALUES('Vinhedo Girassol')
+GO
+
+INSERT INTO location VALUES(11, 113, null)
+GO
+
+INSERT INTO wine_bottle
+VALUES  
+(
+    'Terroir Girassol', --nome
+    2021, --safra
+    139, --preco
+    '2023-03-27', --datacompra
+    null, --dataconsumo
+    'Vinho para a colecao', --comentario
+    null, --nota
+    0, --preferido?
+    1, --tipo
+    42, --variedade
+    5, --vinicola
+    3, --consumed
+    null, --profile id
+    4 --location id
+)
+---
+INSERT INTO winery VALUES('Podere Brizio')
+GO
+
+INSERT INTO subregion VALUES ('Montalcino')
+
+INSERT INTO location VALUES(3, 45, 46)
+GO
+
+INSERT INTO wine_bottle
+VALUES  
+(
+    'Brunello Di Montalcino DOCG', --nome
+    2013, --safra
+    736, --preco
+    '2023-03-01', --datacompra
+    null, --dataconsumo
+    'Peresente de aniversario de 41 anos. De: Biazinha', --comentario
+    null, --nota
+    1, --preferido?
+    1, --style
+    32, --variedade
+    6, --vinicola
+    1, --consumed
+    null, --profile id
+    5 --location id
+)
+
+
+---
+INSERT INTO winery VALUES('De Martino')
+GO
+
+
+INSERT INTO location VALUES(12, 117, 33)
+GO
+
+INSERT INTO wine_bottle
+VALUES  
+(
+    'De Martino', --nome
+    2019, --safra
+    89.90, --preco
+    '2022-12-20', --datacompra
+    null, --dataconsumo
+    null, --comentario
+    null, --nota
+    0, --preferido?
+    1, --style
+    35, --variedade
+    7, --vinicola
+    1, --consumed
+    null, --profile id
+    6 --location id
+)
+
+---
+INSERT INTO profile VALUES (3,2,1,5,2, 'Acidez muito pronunciada') 
+
+
+INSERT INTO wine_bottle
+VALUES  
+(
+    'Mariana', --nome
+    2021, --safra
+    69.98, --preco
+    '2022-12-20', --datacompra
+    '2023-03-05', --dataconsumo
+    null, --comentario
+    6, --nota
+    0, --preferido?
+    2, --tipo
+    48, --variedade
+    4, --vinicola
+    2, --consumed
+    3, --profile id
+    3 --location id
+)
+
+---
+
