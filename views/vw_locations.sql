@@ -1,12 +1,13 @@
 CREATE OR ALTER VIEW vw_locations
 AS
     SELECT 
-        country.id AS 'Country Id',
+        location.id AS 'Location Id',
         country.country_name AS 'Country Name', 
-        region.id AS 'Region Id',
+        country.id AS 'Country Id',
         region.region_name AS 'Region Name',
-        subregion.id AS 'Subregion Id',
-        subregion.subregion_name AS 'Subregion Name'
+        region.id AS 'Region Id',
+        subregion.subregion_name AS 'Subregion Name',
+        subregion.id AS 'Subregion Id'
     FROM 
         location
     LEFT JOIN country ON location.country_id = country.id
