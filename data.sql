@@ -523,3 +523,153 @@ VALUES
     3 --location id
 )
 
+
+---
+INSERT INTO winery VALUES('4 Gatos Locos')
+GO
+
+INSERT INTO profile VALUES(3, 4, 4, 3, 3, 'Vinho com taninos pronunciados')
+
+INSERT INTO wine_bottle
+VALUES  
+(
+    '4 Gatos Locos', --nome
+    2020, --safra
+    218, --preco
+    '2022-12-11', --datacompra
+    '2023-04-02', --dataconsumo
+    null, --comentario
+    7, --nota
+    0, --preferido?
+    1, --style
+    36, --variedade
+    8, --vinicola
+    2, --consumed
+    6, --profile id
+    2 --location id
+)
+
+---
+
+INSERT INTO winery VALUES('Angove')
+
+INSERT INTO location VALUES(19, 74, null)
+
+INSERT INTO wine_bottle
+VALUES  
+(
+    'Long Row Sauvignon Blanc', --nome
+    2020, --safra
+    95, --preco
+    '2022-12-11', --datacompra
+    '2022-12-31', --dataconsumo
+    null, --comentario
+    6, --nota
+    0, --preferido?
+    2, --style
+    10, --variedade
+    9, --vinicola
+    2, --consumed
+    null, --profile id
+    7 --location id
+)
+
+
+---
+INSERT INTO wine_bottle
+VALUES  
+(
+    'Long Row Sauvignon Blanc', --nome
+    2020, --safra
+    95, --preco
+    '2022-12-11', --datacompra
+    '2023-03-15', --dataconsumo
+    null, --comentario
+    6, --nota
+    0, --preferido?
+    2, --style
+    10, --variedade
+    9, --vinicola
+    2, --consumed
+    null, --profile id
+    7 --location id
+)
+
+---
+
+INSERT INTO winery VALUES ('Quinta da Calçada')
+INSERT INTO location VALUES(4, 47, null)
+
+INSERT INTO subregion VALUES('Amarante')
+
+UPDATE region
+SET region_name = 'Minho'
+WHERE id = 47
+
+UPDATE [location]
+SET subregion_id = 47
+WHERE id = 8
+
+INSERT INTO wine_bottle
+VALUES  
+(
+    'Quinta da Calçada Alvarinho', --nome
+    2021, --safra
+    180, --preco
+    '2023-01-10', --datacompra
+    '2023-01-14', --dataconsumo
+    'Vinho Verde DOC', --comentario
+    7, --nota
+    0, --preferido?
+    2, --style
+    6, --variedade
+    10, --vinicola
+    2, --consumed
+    null, --profile id
+    8 --location id
+)
+
+---
+INSERT INTO wine_bottle
+VALUES  
+(
+    'Quinta da Calçada Alvarinho', --nome
+    2021, --safra
+    180, --preco
+    '2023-01-10', --datacompra
+    null, --dataconsumo
+    'Vinho Verde DOC', --comentario
+    null, --nota
+    0, --preferido?
+    2, --style
+    6, --variedade
+    10, --vinicola
+    1, --consumed
+    null, --profile id
+    8 --location id
+),
+(
+    'Quinta da Calçada Alvarinho', --nome
+    2021, --safra
+    180, --preco
+    '2023-01-10', --datacompra
+    null, --dataconsumo
+    'Vinho Verde DOC', --comentario
+    null, --nota
+    0, --preferido?
+    2, --style
+    6, --variedade
+    10, --vinicola
+    1, --consumed
+    null, --profile id
+    8 --location id
+)
+
+---
+
+
+
+
+
+
+
