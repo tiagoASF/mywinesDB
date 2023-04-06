@@ -828,3 +828,208 @@ VALUES
     null, --profile id
     12 --location id
 )
+
+---
+INSERT INTO subregion VALUES('Bio-Bio Valley')
+GO
+
+INSERT INTO location VALUES(12,118,54)
+GO
+
+INSERT INTO wine_bottle
+VALUES  
+(
+    'Adobe Pinot Noir', --nome
+    2021, --safra
+    79.99, --preco
+    '2023-02-19', --datacompra
+    '2023-02-21', --dataconsumo
+    'Encontro com Bruna, Kris, Thaisa e Leo', --comentario
+    null, --nota
+    0, --preferido?
+    1, --style
+    22, --variedade
+    12, --vinicola
+    2, --consumed
+    null, --profile id
+    13 --location id
+),
+(
+    'Adobe Pinot Noir', --nome
+    2021, --safra
+    49.95, --preco
+    '2023-03-04', --datacompra
+    null, --dataconsumo
+    null, --comentario
+    null, --nota
+    0, --preferido?
+    1, --style
+    22, --variedade
+    12, --vinicola
+    1, --consumed
+    null, --profile id
+    13 --location id
+),
+(
+    'Adobe Pinot Noir', --nome
+    2021, --safra
+    49.95, --preco
+    '2023-03-04', --datacompra
+    null, --dataconsumo
+    null, --comentario
+    null, --nota
+    0, --preferido?
+    1, --style
+    22, --variedade
+    12, --vinicola
+    1, --consumed
+    null, --profile id
+    13 --location id
+)
+
+
+INSERT INTO wine_bottle 
+VALUES
+(
+    'Adobe Carmenere', --nome
+    2021, --safra
+    49.95, --preco
+    '2023-03-04', --datacompra
+    null, --dataconsumo
+    null, --comentario
+    null, --nota
+    0, --preferido?
+    1, --style
+    26, --variedade
+    12, --vinicola
+    1, --consumed
+    null, --profile id
+    11 --location id
+)
+
+INSERT INTO wine_bottle 
+VALUES
+(
+    'Adobe Merlot', --nome
+    2018, --safra
+    49.95, --preco
+    '2023-03-04', --datacompra
+    null, --dataconsumo
+    null, --comentario
+    null, --nota
+    0, --preferido?
+    1, --style
+    29, --variedade
+    12, --vinicola
+    1, --consumed
+    null, --profile id
+    12 --location id
+)
+
+INSERT INTO location VALUES (12, 117, null)
+
+INSERT INTO wine_bottle 
+VALUES
+(
+    'Adobe Cabernet Sauvignon', --nome
+    2021, --safra
+    49.95, --preco
+    '2023-03-04', --datacompra
+    null, --dataconsumo
+    null, --comentario
+    null, --nota
+    0, --preferido?
+    1, --style
+    35, --variedade
+    12, --vinicola
+    1, --consumed
+    null, --profile id
+    15 --location id
+)
+
+---
+INSERT INTO winery VALUES('DuediPi')
+
+INSERT INTO location VALUES(3, 40, null)
+
+INSERT INTO wine_bottle 
+VALUES
+(
+    'DuediPi Pinot Nero', --nome
+    2021, --safra
+    128, --preco
+    '2022-12-11', --datacompra
+    '2023-02-08', --dataconsumo
+    null, --comentario
+    null, --nota
+    0, --preferido?
+    1, --style
+    22, --variedade
+    13, --vinicola
+    2, --consumed
+    null, --profile id
+    16 --location id
+)
+
+-----
+
+INSERT INTO winery VALUES('Fantini')
+
+INSERT INTO location VALUES(3, 37, null)
+
+
+INSERT INTO variety VALUES('Pecorino')
+
+INSERT INTO wine_bottle 
+VALUES
+(
+    'Casale Vecchio', --nome
+    2019, --safra
+    128, --preco
+    '2023-03-01', --datacompra
+    '2023-03-25', --dataconsumo
+    null, --comentario
+    8, --nota
+    0, --preferido?
+    2, --style
+    51, --variedade
+    15, --vinicola
+    1, --consumed
+    null, --profile id
+    18--location id
+)
+
+UPDATE wine_bottle
+SET storage_condition_id = 2
+WHERE id = 31
+---
+
+INSERT INTO variety VALUES('Tannat')
+INSERT INTO winery VALUES('Don Guerino')
+INSERT INTO profile VALUES(4, 4, 3, 2, 3, 'Vinho pouco caracteristico da variedade Tannat. Pouca acidez e poucos taninos')
+INSERT INTO location VAlUES(11, 106, null)
+
+
+INSERT INTO wine_bottle 
+VALUES
+(
+    'El Gaucho', --nome
+    2021, --safra
+    97.99, --preco
+    '2023-02-19', --datacompra
+    '2023-02-21', --dataconsumo
+    'Encontro com Bruna, Kris, Thaisa e Leo', --comentario
+    5, --nota
+    0, --preferido?
+    1, --style
+    52, --variedade
+    16,--vinicola
+    1, --consumed
+    8, --profile id
+    19--location id
+)
+
+UPDATE wine_bottle
+SET storage_condition_id = 2
+WHERE id = 32
+
