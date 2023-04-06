@@ -666,10 +666,165 @@ VALUES
 )
 
 ---
+INSERT INTO profile VALUES (3, 2, 1, 5, 2, 'Vinho bastante acido')
 
 
 
+UPDATE wine_bottle
+SET
+    consumption_date = '2023-04-06',
+    score = 6,
+    storage_condition_id = 2,
+    profile_id = 7
+WHERE id = 15
+
+---
+UPDATE wine_bottle
+SET score = 6, profile_id = 7
+WHERE id = 14
+
+---
+INSERT INTO winery
+VALUES('Haras de Pirque')
+INSERT INTO subregion VALUES ('Leyda Valley')
+INSERT INTO subregion VALUES ('Casablanca Valley')
+INSERT INTO location VALUES(12, 116, 48)
+INSERT INTO location VALUES(12, 116, 49)
 
 
+INSERT INTO wine_bottle
+VALUES  
+(
+    'Albaclara', --nome
+    2020, --safra
+    79.90, --preco
+    '2022-12-20', --datacompra
+    null, --dataconsumo
+    null, --comentario
+    null, --nota
+    0, --preferido?
+    2, --style
+    10, --variedade
+    11, --vinicola
+    1, --consumed
+    null, --profile id
+    10 --location id
+)
 
+INSERT INTO wine_bottle
+VALUES  
+(
+    'Haras de Pirque', --nome
+    2021, --safra
+    89.98, --preco
+    '2022-12-20', --datacompra
+    '2023-01-06', --dataconsumo
+    null, --comentario
+    7, --nota
+    0, --preferido?
+    2, --style
+    13, --variedade
+    11, --vinicola
+    2, --consumed
+    null, --profile id
+    9 --location id
+)
 
+---
+INSERT INTO winery VALUES('Emiliana')
+INSERT INTO subregion VALUES('Valle del Colchagua')
+INSERT INTO subregion VALUES('Rapel Valley')
+
+INSERT INTO location VALUES(12, 117, 50)
+
+INSERT INTO wine_bottle
+VALUES  
+(
+    'Adobe Gewurztraminer', --nome
+    2020, --safra
+    79.99, --preco
+    '2023-02-03', --datacompra
+    '2023-03-04', --dataconsumo
+    'Otima relacao custo-beneficio', --comentario
+    7, --nota
+    0, --preferido?
+    2, --style
+    17, --variedade
+    12, --vinicola
+    2, --consumed
+    null, --profile id
+    11 --location id
+)
+
+UPDATE subregion
+SET subregion_name = 'Maipo Valley'
+WHERE id = 33;
+
+UPDATE subregion
+SET subregion_name = 'Colchagua Valley'
+WHERE id = 50;
+
+UPDATE location
+SET subregion_id = 51
+WHERE id = 12;
+
+INSERT INTO wine_bottle
+VALUES  
+(
+    'Adobe Chardonnay', --nome
+    2021, --safra
+    79.99, --preco
+    '2023-02-03', --datacompra
+    '2023-02-18', --dataconsumo
+    'Otima relacao custo-beneficio', --comentario
+    7, --nota
+    0, --preferido?
+    2, --style
+    13, --variedade
+    12, --vinicola
+    2, --consumed
+    null, --profile id
+    11 --location id
+)
+
+UPDATE wine_bottle
+SET location_id = 12
+WHERE id IN (19, 20)
+
+INSERT INTO wine_bottle
+VALUES  
+(
+    'Adobe Chardonnay', --nome
+    2021, --safra
+    79.99, --preco
+    '2023-02-19', --datacompra
+    '2023-02-24', --dataconsumo
+    'Otima relacao custo-beneficio', --comentario
+    7, --nota
+    0, --preferido?
+    2, --style
+    13, --variedade
+    12, --vinicola
+    2, --consumed
+    null, --profile id
+    12 --location id
+)
+
+INSERT INTO wine_bottle
+VALUES  
+(
+    'Adobe Gewurztraminer', --nome
+    2021, --safra
+    49.95, --preco
+    '2023-03-04', --datacompra
+    null, --dataconsumo
+    null, --comentario
+    null, --nota
+    0, --preferido?
+    2, --style
+    17, --variedade
+    12, --vinicola
+    1, --consumed
+    null, --profile id
+    12 --location id
+)
