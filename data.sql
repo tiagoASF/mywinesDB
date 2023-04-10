@@ -297,7 +297,7 @@ VALUES
     '2022-10-10',
     '2023-03-31',
     'Vinho simples, vale o valor promocional pago, mas nao o preco de tabela',
-    6,
+    3,
     0,
     2, --branco
     13, --chardonnay
@@ -325,7 +325,7 @@ VALUES
     '2022-12-20',
     '2023-03-10',
     'Malbec fora do padrao esperado, pouco frutado e bastante tanico. Fermentacao realizada com grande parte dos cachos inteiros, e estagio em tanque de concreto',
-    7, --nota
+    4, --nota
     0, --preferido?
     1, --tipo
     36, --variedade
@@ -363,7 +363,7 @@ VALUES
 UPDATE wine_bottle
 SET 
     consumption_date = '2023-01-21',
-    score = 7,
+    score = 3,
     isFavorite = 0,
     storage_condition_id = 2,
     location_id = 3
@@ -384,7 +384,7 @@ VALUES
     '2022-12-20', --datacompra
     '2023-01-27', --dataconsumo
     null, --comentario
-    8, --nota
+    4, --nota
     1, --preferido?
     1, --tipo
     1, --variedade
@@ -488,7 +488,7 @@ VALUES
     '2022-12-20', --datacompra
     '2023-03-05', --dataconsumo
     null, --comentario
-    6, --nota
+    2, --nota
     0, --preferido?
     2, --tipo
     48, --variedade
@@ -513,7 +513,7 @@ VALUES
     '2022-12-11', --datacompra
     '2023-03-03', --dataconsumo
     null, --comentario
-    8, --nota
+    5, --nota
     1, --preferido?
     1, --tipo
     49, --variedade
@@ -539,7 +539,7 @@ VALUES
     '2022-12-11', --datacompra
     '2023-04-02', --dataconsumo
     null, --comentario
-    7, --nota
+    4, --nota
     0, --preferido?
     1, --style
     36, --variedade
@@ -564,7 +564,7 @@ VALUES
     '2022-12-11', --datacompra
     '2022-12-31', --dataconsumo
     null, --comentario
-    6, --nota
+    3, --nota
     0, --preferido?
     2, --style
     10, --variedade
@@ -585,7 +585,7 @@ VALUES
     '2022-12-11', --datacompra
     '2023-03-15', --dataconsumo
     null, --comentario
-    6, --nota
+    3, --nota
     0, --preferido?
     2, --style
     10, --variedade
@@ -619,7 +619,7 @@ VALUES
     '2023-01-10', --datacompra
     '2023-01-14', --dataconsumo
     'Vinho Verde DOC', --comentario
-    7, --nota
+    3, --nota
     0, --preferido?
     2, --style
     6, --variedade
@@ -673,14 +673,14 @@ INSERT INTO profile VALUES (3, 2, 1, 5, 2, 'Vinho bastante acido')
 UPDATE wine_bottle
 SET
     consumption_date = '2023-04-06',
-    score = 6,
+    score = 3,
     storage_condition_id = 2,
     profile_id = 7
 WHERE id = 15
 
 ---
 UPDATE wine_bottle
-SET score = 6, profile_id = 7
+SET score = 3, profile_id = 7
 WHERE id = 14
 
 ---
@@ -720,7 +720,7 @@ VALUES
     '2022-12-20', --datacompra
     '2023-01-06', --dataconsumo
     null, --comentario
-    7, --nota
+    4, --nota
     0, --preferido?
     2, --style
     13, --variedade
@@ -746,7 +746,7 @@ VALUES
     '2023-02-03', --datacompra
     '2023-03-04', --dataconsumo
     'Otima relacao custo-beneficio', --comentario
-    7, --nota
+    3, --nota
     0, --preferido?
     2, --style
     17, --variedade
@@ -777,7 +777,7 @@ VALUES
     '2023-02-03', --datacompra
     '2023-02-18', --dataconsumo
     'Otima relacao custo-beneficio', --comentario
-    7, --nota
+    3, --nota
     0, --preferido?
     2, --style
     13, --variedade
@@ -800,7 +800,7 @@ VALUES
     '2023-02-19', --datacompra
     '2023-02-24', --dataconsumo
     'Otima relacao custo-beneficio', --comentario
-    7, --nota
+    3, --nota
     0, --preferido?
     2, --style
     13, --variedade
@@ -989,7 +989,7 @@ VALUES
     '2023-03-01', --datacompra
     '2023-03-25', --dataconsumo
     null, --comentario
-    8, --nota
+    4, --nota
     0, --preferido?
     2, --style
     51, --variedade
@@ -1019,7 +1019,7 @@ VALUES
     '2023-02-19', --datacompra
     '2023-02-21', --dataconsumo
     'Encontro com Bruna, Kris, Thaisa e Leo', --comentario
-    5, --nota
+    2, --nota
     0, --preferido?
     1, --style
     52, --variedade
@@ -1033,3 +1033,161 @@ UPDATE wine_bottle
 SET storage_condition_id = 2
 WHERE id = 32
 
+---
+
+INSERT INTO profile VALUES(2, 4, 3, 3, 4, 'Alcoolico, mas muito bem integrado. Nao evolui em taca e com pouca complexidade aromatica.');
+
+UPDATE wine_bottle
+SET 
+    bottle_name = 'Gerard Bertrand Minervois An 873',
+    consumption_date = '2023-04-09',
+    score = 4,
+    storage_condition_id = 2,
+    comments = 'Acompanhou churrasco de carne vermelha.',
+    profile_id = 1007,
+    isFavorite = 1
+WHERE id = 30
+
+---
+INSERT INTO profile VALUES(2, 2, 3, 4, 3, 'Vinho de bastante acidez, mas muito tanico para um Pinot Noir')
+
+UPDATE wine_bottle
+SET 
+    consumption_date = '2023-04-06',
+    score = 2,
+    storage_condition_id = 2,
+    comments = 'Acompanhou empadas diversas. Vinho de qualidade condizente com o preco de compra',
+    profile_id = 1008
+WHERE id = 24
+
+
+
+UPDATE wine_bottle
+SET
+    consumption_date = '2023-04-05'
+WHERE id = 15
+
+
+---
+INSERT INTO Winery VALUES ('Garzon');
+
+UPDATE winery
+SET winery_name = 'Bodega Garzon'
+WHERE id = 1011
+
+INSERT INTO region VALUES ('Maldonado');
+
+
+INSERT INTO [location] VALUES (10, 134, null)
+
+INSERT INTO wine_bottle 
+VALUES
+(
+    'Garzon Estate Sauvignon Blanc de Corte', --nome
+    2021, --safra
+    133, --preco
+    '2022-12-11', --datacompra
+    null, --dataconsumo
+    null, --comentario
+    null, --nota
+    0, --preferido?
+    2, --style
+    10, --variedade
+    1011,--vinicola
+    1, --consumed
+    null, --profile id
+    1009--location id
+)
+
+INSERT INTO wine_bottle 
+VALUES
+(
+    'Garzon Gran Reserva Tannat', --nome
+    2016, --safra
+    482, --preco
+    '2023-01-26', --datacompra
+    null, --dataconsumo
+    null, --comentario
+    null, --nota
+    0, --preferido?
+    1, --style
+    52, --variedade
+    1011,--vinicola
+    1, --consumed
+    null, --profile id
+    1009--location id
+)
+
+---
+
+INSERT INTO style VALUES ('Orange Wine');
+INSERT INTO variety VALUES ('Moscatel');
+INSERT INTO winery VALUES ('Luis Felipe Edwars');
+INSERT INTO subregion VALUES ('Itata Valley');
+
+INSERT INTO location VALUES(12, 118, 58);
+
+
+
+INSERT INTO wine_bottle 
+VALUES
+(
+    'Macerao Naranjo Orange', --nome
+    2021, --safra
+    89.90, --preco
+    '2023-02-01', --datacompra
+    '2023-02-01', --dataconsumo
+    null, --comentario
+    2, --nota
+    0, --preferido?
+    6, --style
+    61, --variedade
+    1012,--vinicola
+    2, --consumed
+    null, --profile id
+    1010--location id
+)
+
+---
+INSERT INTO winery VALUES ('Clos Des Fous');
+
+
+INSERT INTO wine_bottle 
+VALUES
+(
+    'Pour Ma Gueule', --nome
+    2018, --safra
+    111, --preco
+    '2023-01-26', --datacompra
+    '2023-02-17', --dataconsumo
+    null, --comentario
+    3, --nota
+    0, --preferido?
+    1, --style
+    22, --variedade
+    1013,--vinicola
+    2, --consumed
+    null, --profile id
+    1010--location id
+)
+
+
+
+INSERT INTO wine_bottle 
+VALUES
+(
+    'Pour Ma Gueule', --nome
+    2018, --safra
+    111, --preco
+    '2023-01-26', --datacompra
+    '2023-02-05', --dataconsumo
+    null, --comentario
+    3, --nota
+    0, --preferido?
+    1, --style
+    22, --variedade
+    1013,--vinicola
+    2, --consumed
+    null, --profile id
+    1010--location id
+)
