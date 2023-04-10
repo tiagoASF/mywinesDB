@@ -116,7 +116,7 @@ CREATE TABLE wine_bottle
     purchase_date DATE,
     consumption_date DATE,
     comments NVARCHAR(max),
-    score TINYINT CHECK (score >= 1 AND score <= 10),
+    score TINYINT CHECK (score >= 1 AND score <= 5),
     isFavorite BIT DEFAULT 0,
     style_id TINYINT NOT NULL,
     variety_id TINYINT NOT NULL,
@@ -151,6 +151,32 @@ GO
 
 
 ------------------------------------------------- TOOLING ---------------------------------------------------
+
+SELECT * FROM vw_locations WHERE [Country Name] = 'Chile' ORDER BY [Region Name]
+SELECT * FROM vw_bottles
+SELECT * FROM vw_consumed_in_2023 ORDER BY 'Consumido em' ASC
+
+SELECT * FROM wine_bottle WHERE variety_id LIKE (SELECT id FROM variety Where variety_name LIKE 'alb%')
+SELECT * FROM wine_bottle
+
+SELECT * FROM winery
+SELECT * FROM country WHERE country_name LIKE '%br%'
+SELECT * FROM region WHERE region_name LIKE '%vinh%'
+SELECT * FROM subregion WHERE subregion_name LIKE '%bio%'
+SELECT * FROM style
+SELECT * FROM storage_condition
+SELECT * FROM variety WHERE variety_name LIKE '%tan%'
+SELECT * FROM profile
+
+
+SELECT * FROM storage_condition
+SELECT * FROM [location]
+
+SELECT * FROM variety WHERE variety_name LIKE '%sy%'
+
+UPDATE subregion
+SET subregion_name = 'Colchagua Valley'
+WHERE id = 50;
 
 --SEEING TABLES 
 SELECT *
