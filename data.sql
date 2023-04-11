@@ -1191,3 +1191,196 @@ VALUES
     null, --profile id
     1010--location id
 )
+
+---
+INSERT INTO wine_bottle 
+VALUES
+(
+    'Footprint Chardonnay', --nome
+    2019, --safra
+    49.90, --preco
+    '2022-06-01', --datacompra
+    null, --dataconsumo
+    null, --comentario
+    null, --nota
+    0, --preferido?
+    2, --style
+    13, --variedade
+    1,--vinicola
+    1, --consumed
+    null, --profile id
+    1--location id
+)
+
+
+---
+INSERT INTO winery VALUES('Adega Cooperativa de Penalva do Castelo')
+INSERT INTO location VALUES(3, 48, null);
+
+UPDATE [location]
+SET country_id =4
+WHERE id = 1011
+
+
+INSERT INTO wine_bottle 
+VALUES
+(
+    'Lagares de Penalva', --nome
+    2018, --safra
+    54.99, --preco
+    '2023-02-22', --datacompra
+    null, --dataconsumo
+    null, --comentario
+    null, --nota
+    0, --preferido?
+    1, --style
+    1, --variedade
+    1014,--vinicola
+    1, --consumed
+    null, --profile id
+    1011--location id
+)
+
+---
+INSERT INTO winery VALUES('Alamos')
+INSERT INTO subregion VALUES('Salta')
+INSERT INTO location VALUES(9, 105, 59)
+
+INSERT INTO wine_bottle 
+VALUES
+(
+    'Alamos Torrontes', --nome
+    2019, --safra
+    129.90, --preco
+    '2023-02-01', --datacompra
+    '2023-02-04', --dataconsumo
+    null, --comentario
+    3, --nota
+    0, --preferido?
+    2, --style
+    20, --variedade
+    1016,--vinicola
+    2, --consumed
+    null, --profile id
+    1012--location id
+)
+
+---
+INSERT INTO variety VALUES('Melon de Bourgogne')
+INSERT INTO winery VALUES('Famille Bougrier')
+INSERT INTO location VALUES(1,2,null)
+
+INSERT INTO wine_bottle 
+VALUES
+(
+    'Muscadet Sevre & Maine', --nome
+    2020, --safra
+    159, --preco
+    '2023-01-26', --datacompra
+    null, --dataconsumo
+    null, --comentario
+    null, --nota
+    0, --preferido?
+    2, --style
+    62, --variedade
+    1017,--vinicola
+    1, --consumed
+    null, --profile id
+    1013--location id
+)
+
+---
+INSERT INTO variety VALUES('Verdicchio')
+INSERT INTO winery VALUES('Fazi Battaglia')
+
+INSERT INTO location VALUES(3,38,null)
+
+
+INSERT INTO wine_bottle 
+VALUES
+(
+    'Verdicchio dei Castelli di Jesi Classico Titulus DOC', --nome
+    2020, --safra
+    115, --preco
+    '2023-01-26', --datacompra
+    null, --dataconsumo
+    null, --comentario
+    null, --nota
+    0, --preferido?
+    2, --style
+    63, --variedade
+    1018,--vinicola
+    1, --consumed
+    null, --profile id
+    1014--location id
+)
+
+---
+INSERT INTO winery VALUES('Bodegas Langa')
+INSERT INTO location VALUES(2, 20, null)
+
+INSERT INTO wine_bottle 
+VALUES
+(
+    'Sekeida Mountain Vineyard', --nome
+    2018, --safra
+    85, --preco
+    '2023-01-26', --datacompra
+    '2023-03-24', --dataconsumo
+    null, --comentario
+    null, --nota
+    0, --preferido?
+    1, --style
+    27, --variedade
+    1019,--vinicola
+    2, --consumed
+    null, --profile id
+    1015--location id
+)
+
+---
+INSERT INTO region VALUES('Serra do Sudeste')
+INSERT INTO location VALUES(11, 135, null)
+
+INSERT INTO wine_bottle 
+VALUES
+(
+    'Don Guerino Reserva Chardonnay', --nome
+    2019, --safra
+    80, --preco
+    '2023-01-28', --datacompra
+    '2023-01-29', --dataconsumo
+    null, --comentario
+    null, --nota
+    0, --preferido?
+    2, --style
+    13, --variedade
+    16,--vinicola
+    2, --consumed
+    null, --profile id
+    1016--location id
+)
+
+---
+INSERT INTO region VALUES('')
+INSERT INTO location VALUES(4, 58, null)
+INSERT INTO winery VALUES('Fonseca')
+
+INSERT INTO wine_bottle 
+VALUES
+(
+    'Fonseca Porto Aged Tawny 10 Years Old', --nome
+    null, --safra
+    410, --preco
+    '2022-12-11', --datacompra
+    '2023-04-29', --dataconsumo
+    'Otimo vinho do porto', --comentario
+    5, --nota
+    1, --preferido?
+    5, --style
+    46, --variedade
+    1020,--vinicola
+    2, --consumed
+    null, --profile id
+    1017--location id
+)
