@@ -321,17 +321,3 @@ CREATE TABLE garrafa_fotografia
     CONSTRAINT FK_garrafafotografia_garrafa FOREIGN KEY(garrafa_id)
         REFERENCES garrafa_adquirida(id)
 )
-
-
-CREATE TABLE LOG_confraria
-(
-    confraria_id INT NOT NULL,
-    tipo_operacao VARCHAR(10) NOT NULL CHECK(tipo_operacao IN('INSERT', 'UPDATE', 'DELETE')),
-    horario_operacao DATETIME NOT NULL,
-    autor_operacao NVARCHAR(50) NOT NULL,
-    registro_antigo NVARCHAR(1000),
-    registro_novo NVARCHAR(1000),
-    CONSTRAINT PK_LOG_confraria PRIMARY KEY(confraria_id, tipo_operacao, horario_operacao),
-    CONSTRAINT FK_LOG_confraria FOREIGN KEY(confraria_id)
-        REFERENCES confraria(id)
-)
