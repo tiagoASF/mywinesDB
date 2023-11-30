@@ -134,167 +134,165 @@ CREATE INDEX IX_wine_abv ON wine(abv)
 
 
 
-CREATE TABLE loja
+CREATE TABLE wine_store
 (
     id INT IDENTITY(1,1),
-    nome VARCHAR(30) NOT NULL,
-    pais VARCHAR(30) NOT NULL DEFAULT('Brasil'),
-    cidade VARCHAR(30) NOT NULL,
-    coordenadas_id INT,
-    CONSTRAINT PK_loja PRIMARY KEY(id),
-    CONSTRAINT FK_loja_coordenadas FOREIGN KEY(coordenadas_id)
-        REFERENCES coordenadas_geograficas(id)
+    name VARCHAR(30) NOT NULL,
+    city VARCHAR(30) NOT NULL,
+    country VARCHAR(100) NOT NULL DEFAULT('Brazil'),
+    geographic_coordinates_id INT,
+    CONSTRAINT PK_wine_store PRIMARY KEY(id),
+    CONSTRAINT FK_wine_store_coordinates FOREIGN KEY(geographic_coordinates_id)
+        REFERENCES geographic_coordinates(id)
 )
-CREATE INDEX IX_loja_nome on loja(nome)
+CREATE INDEX IX_wine_store_name on wine_store(name)
 
 
-CREATE TABLE armazenamento
+CREATE TABLE status
 (
     id TINYINT IDENTITY(1,1),
-    forma_armazenamento VARCHAR(20) NOT NULL UNIQUE,
-    CONSTRAINT PK_armazenamento PRIMARY KEY(id)
+    status_description VARCHAR(20) NOT NULL UNIQUE,
+    CONSTRAINT PK_status PRIMARY KEY(id)
 )
-CREATE INDEX IX_forma_armazenamento ON armazenamento(forma_armazenamento)
+CREATE INDEX IX_status ON status(status_description)
 
 
-CREATE TABLE perfil_vinho
+CREATE TABLE taste_profile
 (
     id INT IDENTITY(1,1),
-    acidez TINYINT NOT NULL CHECK(acidez >= 1 AND acidez <= 5),
-    corpo TINYINT NOT NULL CHECK(corpo >= 1 AND corpo <= 5),
-    tanino TINYINT NOT NULL CHECK(tanino >= 1 AND tanino <= 5),
-    fruta TINYINT NOT NULL CHECK(fruta >= 1 AND fruta <= 5),
-    alcool TINYINT NOT NULL CHECK(alcool >= 1 AND alcool <= 5),
-    CONSTRAINT PK_perfil PRIMARY KEY(id)
+    acidy TINYINT NOT NULL CHECK(acidy >= 1 AND acidy <= 5),
+    body TINYINT NOT NULL CHECK(body >= 1 AND body <= 5),
+    tannin TINYINT NOT NULL CHECK(tannin >= 1 AND tannin <= 5),
+    fruit TINYINT NOT NULL CHECK(fruit >= 1 AND fruit <= 5),
+    alcohol TINYINT NOT NULL CHECK(alcohol >= 1 AND alcohol <= 5),
+    CONSTRAINT PK_taste_profile PRIMARY KEY(id)
 )
 
-
-CREATE TABLE imagem
+CREATE TABLE image
 (
     id INT IDENTITY(1,1),
     slug VARCHAR(100) NOT NULL UNIQUE,
-    CONSTRAINT PK_imagem PRIMARY KEY(id)
+    date DATETIME2 DEFAULT(GETDATE()),
+    CONSTRAINT PK_image PRIMARY KEY(id)
 )
 
 
-CREATE TABLE rede_social
+CREATE TABLE social_media
 (
     id TINYINT IDENTITY(1,1),
-    nome VARCHAR(50) NOT NULL UNIQUE,
-    icone_id INT NOT NULL UNIQUE,
-    CONSTRAINT PK_redesocial PRIMARY KEY(id),
-    CONSTRAINT FK_redesocial_imagem FOREIGN KEY(icone_id)
-        REFERENCES imagem(id) 
+    name VARCHAR(50) NOT NULL UNIQUE,
+    icon_id INT NOT NULL UNIQUE,
+    CONSTRAINT PK_social_media PRIMARY KEY(id),
+    CONSTRAINT FK_social_media_image FOREIGN KEY(icon_id)
+        REFERENCES image(id) 
 )
 
 
-CREATE TABLE enofilo
+CREATE TABLE enophile
 (
     id INT IDENTITY(1,1),
-    nome NVARCHAR(50) NOT NULL UNIQUE,
+    name NVARCHAR(50) NOT NULL UNIQUE,
     email VARCHAR(320) NOT NULL UNIQUE,
-    biografia NVARCHAR(300),
-    data_nascimento DATE NOT NULL CHECK(YEAR(GETDATE()) - YEAR(data_nascimento) >= 18),
-    data_cadastro DATE DEFAULT(GETDATE()),
-    data_desativacao DATE,
-    esta_ativo BIT NOT NULL DEFAULT(1),
-    imagem_perfil_id INT,
-    CONSTRAINT PK_enofilo PRIMARY KEY(id),
-    CONSTRAINT FK_enofilo_imagem FOREIGN KEY(imagem_perfil_id)
-        REFERENCES imagem(id) ON DELETE CASCADE
+    biography NVARCHAR(300),
+    birth_date DATE NOT NULL CHECK(YEAR(GETDATE()) - YEAR(birth_date) >= 18),
+    register_at DATETIME2 DEFAULT(GETDATE()),
+    deactivate_date DATETIME2,
+    is_active BIT NOT NULL DEFAULT(1),
+    profile_image_id INT,
+    CONSTRAINT PK_enophile PRIMARY KEY(id),
+    CONSTRAINT FK_enophile_image FOREIGN KEY(profile_image_id)
+        REFERENCES image(id) ON DELETE CASCADE
 )
-CREATE INDEX IX_enofilo_nome ON enofilo(nome)
-CREATE INDEX IX_enofilo_email ON enofilo(email)
+CREATE INDEX IX_enophile_name ON enophile(name)
+CREATE INDEX IX_enophile_email ON enophile(email)
 
 
-CREATE TABLE rede_social_enofilo
+CREATE TABLE social_media_enophile
 (
-    enofilo_id INT NOT NULL,
-    rede_social_id TINYINT NOT NULL,
-    link_usuario VARCHAR(100) NOT NULL UNIQUE,
-    CONSTRAINT PK_rede_social_enofilo PRIMARY KEY(enofilo_id, rede_social_id),
-    CONSTRAINT FK_rede_usuario_enofilo FOREIGN KEY(enofilo_id)
-        REFERENCES enofilo(id),
-    CONSTRAINT FK_rede_usuario_redesocial FOREIGN KEY(rede_social_id)
-        REFERENCES rede_social(id)
+    enophile_id INT NOT NULL,
+    social_media_id TINYINT NOT NULL,
+    url VARCHAR(150) NOT NULL UNIQUE,
+    CONSTRAINT PK_social_media_enophile PRIMARY KEY(enophile_id, social_media_id),
+    CONSTRAINT FK_social_media_enophile FOREIGN KEY(enophile_id)
+        REFERENCES enophile(id),
+    CONSTRAINT FK_social_media_enophile_social_media FOREIGN KEY(social_media_id)
+        REFERENCES social_media(id)
 )
 
-
-CREATE TABLE confraria
-(
-    id INT IDENTITY(1,1),
-    nome NVARCHAR(50) NOT NULL UNIQUE,
-    descricao VARCHAR(300) NOT NULL,
-    data_criacao DATE DEFAULT(GETDATE()),
-    data_desativacao DATE,
-    esta_ativo BIT NOT NULL DEFAULT(1),
-    administrador_id INT NOT NULL,
-    imagem_id INT NOT NULL,
-    CONSTRAINT PK_confraria PRIMARY KEY(id),
-    CONSTRAINT FK_confraria_adminstrador FOREIGN KEY(administrador_id)
-        REFERENCES enofilo(id)
-)
-CREATE INDEX IX_confraria_nome ON confraria(nome)
-
-
-CREATE TABLE participante_confraria
-(
-    confraria_id INT NOT NULL,
-    participante_id INT NOT NULL,
-    data_inicio_participacao DATE DEFAULT(GETDATE()),
-    data_fim_participacao DATE,
-    CONSTRAINT PK_participacao_confraria PRIMARY KEY(confraria_id, participante_id),
-    CONSTRAINT FK_participanteconfraria_confraria FOREIGN KEY(confraria_id)
-        REFERENCES confraria(id),
-    CONSTRAINT FK_participanteconfraria_enofilo FOREIGN KEY(participante_id)
-        REFERENCES enofilo(id)
-)
-
-
-CREATE TABLE avaliacao
+CREATE TABLE fraternity
 (
     id INT IDENTITY(1,1),
-    data DATE DEFAULT(GETDATE()),
-    nota TINYINT NOT NULL CHECK(nota >= 1 AND nota <= 10),
-    comentario VARCHAR(300),
-    perfil_id INT NOT NULL,
-    avaliador_id INT NOT NULL,
-    CONSTRAINT PK_avaliacao PRIMARY KEY(id),
-    CONSTRAINT FK_avaliacao_perfil FOREIGN KEY(perfil_id)
-        REFERENCES perfil_vinho(id),
-    CONSTRAINT FK_avaliacao_avaliador FOREIGN KEY(avaliador_id)
-        REFERENCES enofilo(id)
+    name NVARCHAR(50) NOT NULL UNIQUE,
+    description VARCHAR(300) NOT NULL,
+    administrator_id INT NOT NULL,
+    image_id INT NOT NULL,
+    created_at DATETIME2 DEFAULT(GETDATE()),
+    deactivate_date DATETIME2,
+    is_active BIT NOT NULL DEFAULT(1),
+    profile_image_id INT,
+    CONSTRAINT PK_fraternity PRIMARY KEY(id),
+    CONSTRAINT FK_fraternity_administrator FOREIGN KEY(administrator_id)
+        REFERENCES enophile(id)
 )
-CREATE INDEX IX_avaliacao_nota ON avaliacao(nota)
+CREATE INDEX IX_fraternity_name ON fraternity(name)
 
 
-CREATE TABLE garrafa_adquirida
+CREATE TABLE fraternity_member
+(
+    fraternity_id INT NOT NULL,
+    member_id INT NOT NULL,
+    join_date DATETIME2 DEFAULT(GETDATE()),
+    disjoin_date DATETIME2,
+    CONSTRAINT PK_fraternity_member PRIMARY KEY(fraternity_id, member_id),
+    CONSTRAINT FK_fraternity_member_fraternity FOREIGN KEY(fraternity_id)
+        REFERENCES fraternity(id),
+    CONSTRAINT FK_fraternity_member_member FOREIGN KEY(member_id)
+        REFERENCES enophile(id)
+)
+
+
+CREATE TABLE appraisement
 (
     id INT IDENTITY(1,1),
-    data_aquisicao DATE NOT NULL,
-    data_consumo DATE,
-    preco_compra SMALLMONEY,
-    permissao_visualizacao TINYINT DEFAULT(1),
-    compra_online BIT DEFAULT(0),
-    foi_presente BIT DEFAULT(0),
-    foi_consumido BIT DEFAULT(0),
-    descricao VARCHAR(300),
-    garrafa_vinho_id INT NOT NULL,
-    armazenamento_id TINYINT NOT NULL,
-    loja_id INT,
-    avaliacao_id INT,
-    adquirente_id INT NOT NULL,
-    CONSTRAINT PK_garrafa_adquirida PRIMARY KEY(id),
-    CONSTRAINT FK_garrafa_adquirida_vinho FOREIGN KEY(garrafa_vinho_id)
-        REFERENCES garrafa_vinho(id),
-    CONSTRAINT FK_garrafa_adquirida_armazenamento FOREIGN KEY(armazenamento_id)
-        REFERENCES armazenamento(id),
-    CONSTRAINT FK_garrafa_adquirida_loja FOREIGN KEY(loja_id)
-        REFERENCES loja(id),
-    CONSTRAINT FK_garrafa_adquirida_avaliacao FOREIGN KEY(avaliacao_id)
-        REFERENCES avaliacao(id),
-    CONSTRAINT FK_garrafa_adquirida_adquirente FOREIGN KEY(adquirente_id)
-        REFERENCES enofilo(id)
+    evaluation_date DATE DEFAULT(GETDATE()),
+    rating TINYINT NOT NULL CHECK(rating >= 1 AND rating <= 10),
+    impressions VARCHAR(300),
+    taste_profile_id INT NOT NULL,
+    appraiser_id INT NOT NULL,
+    CONSTRAINT PK_appraisement PRIMARY KEY(id),
+    CONSTRAINT FK_appraisement_taste_profile FOREIGN KEY(taste_profile_id)
+        REFERENCES taste_profile(id),
+    CONSTRAINT FK_appraisement_appraiser FOREIGN KEY(appraiser_id)
+        REFERENCES enophile(id)
+)
+CREATE INDEX IX_appraisement_rating ON appraisement(rating)
+
+
+CREATE TABLE acquired_bottle
+(
+    id INT IDENTITY(1,1),
+    acquired_date DATE NOT NULL,
+    consumption_date DATE,
+    purchase_price SMALLMONEY,
+    viewing_permission TINYINT DEFAULT(1),
+    is_gift BIT DEFAULT(0),
+    description VARCHAR(300),
+    wine_id INT NOT NULL,
+    status_id TINYINT NOT NULL,
+    wine_store_id INT,
+    appraisement_id INT,
+    acquirer_id INT NOT NULL,
+    CONSTRAINT PK_acquired_bottle PRIMARY KEY(id),
+    CONSTRAINT FK_acquired_bottle_wine FOREIGN KEY(wine_id)
+        REFERENCES wine(id),
+    CONSTRAINT FK_acquired_bottle_status FOREIGN KEY(status_id)
+        REFERENCES status(id),
+    CONSTRAINT FK_acquired_bottle_wine_store FOREIGN KEY(wine_store_id)
+        REFERENCES wine_store(id),
+    CONSTRAINT FK_acquired_bottle_appraisement FOREIGN KEY(appraisement_id)
+        REFERENCES appraisement(id),
+    CONSTRAINT FK_acquired_bottle_acquirer FOREIGN KEY(acquirer_id)
+        REFERENCES enophile(id)
 )
 
 
@@ -302,37 +300,37 @@ CREATE TABLE feedback
 (
     id INT IDENTITY(1,1),
     like_or_dislike BIT NOT NULL,
-    data DATE DEFAULT(GETDATE()),
-    avaliacao_id INT NOT NULL,
-    avaliador_id INT NOT NULL,
+    date DATE DEFAULT(GETDATE()),
+    appraisement_id INT NOT NULL,
+    appraiser_id INT NOT NULL,
     CONSTRAINT PK_feedback PRIMARY KEY(id),
-    CONSTRAINT FK_feedback_avaliacao FOREIGN KEY(avaliacao_id)
-        REFERENCES avaliacao(id),
-    CONSTRAINT FK_feedback_avaliador FOREIGN KEY(avaliador_id)
-        REFERENCES enofilo(id)
+    CONSTRAINT FK_feedback_appraisement FOREIGN KEY(appraisement_id)
+        REFERENCES appraisement(id),
+    CONSTRAINT FK_feedback_appraiser FOREIGN KEY(appraiser_id)
+        REFERENCES enophile(id)
 )
 
 
-CREATE TABLE fotografia
+CREATE TABLE photo
 (
     id INT IDENTITY(1,1),
-    comentario VARCHAR(300),
+    comments VARCHAR(300),
     slug VARCHAR(100) NOT NULL UNIQUE,
-    data_inclusao DATE DEFAULT(GETDATE()),
-    fotografo_id INT NOT NULL,
-    CONSTRAINT PK_fotografia PRIMARY KEY(id),
-    CONSTRAINT FK_fotografia_fotografo FOREIGN KEY(fotografo_id)
-        REFERENCES enofilo(id)
+    inserted_at DATE DEFAULT(GETDATE()),
+    owner_id INT NOT NULL,
+    CONSTRAINT PK_photo PRIMARY KEY(id),
+    CONSTRAINT FK_photo_owner FOREIGN KEY(owner_id)
+        REFERENCES enophile(id)
 )
 
 
-CREATE TABLE garrafa_fotografia
+CREATE TABLE bottle_photo
 (
-    fotografia_id INT NOT NULL,
-    garrafa_id INT NOT NULL,
-    CONSTRAINT PK_garrafa_fotografia PRIMARY KEY(fotografia_id, garrafa_id),
-    CONSTRAINT FK_garrafafotografia_fotografia FOREIGN KEY(fotografia_id)
-        REFERENCES fotografia(id),
-    CONSTRAINT FK_garrafafotografia_garrafa FOREIGN KEY(garrafa_id)
-        REFERENCES garrafa_adquirida(id)
+    photo_id INT NOT NULL,
+    acquired_bottle_id INT NOT NULL,
+    CONSTRAINT PK_bottle_photo PRIMARY KEY(photo_id, acquired_bottle_id),
+    CONSTRAINT FK_bottle_photo_photo FOREIGN KEY(photo_id)
+        REFERENCES photo(id),
+    CONSTRAINT FK_bottle_photo_bottle FOREIGN KEY(acquired_bottle_id)
+        REFERENCES acquired_bottle(id)
 )
