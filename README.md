@@ -50,19 +50,32 @@ O projeto tem como finalidade a implementação de um banco de dados publicado n
 
 <!-- ROADMAP -->
 ## Roadmap
-- [X] Criação do banco na Azure
-- [X] Projeto do banco
-- [X] Criar tabelas e relacionamentos
-- [X] Coletar dados de varietais, localizações das regiões vitivinícolas, denominações de origem e inserir no banco
-- [ ] Coletar dados das garrafas já consumidas em 2023, estruturando os dados em um arquivo próprio
+### Fase 01
+- [ ] Projeto do banco
+- [ ] Criação do banco
+- [ ] Criar tabelas e relacionamentos
+- [ ] Criar usuarios. Usuario_1 com permissao de escrita e leitura, Usuario_2 com permissao de leitura  
+- [ ] Popular tabela Estilo_Vinho
+- [ ] Popular tabela Tipo_Vinho
+- [ ] Criar tabela de log Garrafa_Vinho 
+- [ ] Criar tabela de log Garrafa_Adquirida
+- [ ] Criar triggers de log Garrafa_Vinho 
+- [ ] Criar triggers de log Tipo_Vinho 
+
+### Fase 02
+- [ ] Inserir dados das garrafas na adega
 - [ ] Criar VIEW para retornar tabela com o país, região e subregião
-- [ ] Criar VIEW para retornar informações de uma garrada consumida
 - [ ] Criar VIEW para retornar informações de uma garrada armazenada
 - [ ] Criar SP para inserir uma localização (levando em consideração país, região e subregião)
 - [ ] Criar SP para inserir um varietal
-- [ ] Criar SP para inserir uma garrafa
+- [ ] Criar SP para inserir uma garrafa adquirida
+
+### Fase 03
+- [ ] Coletar dados das garrafas já consumidas em 2023, estruturando os dados em um arquivo próprio
+- [ ] Criar bucket S3 para armazenar as fotografias
+- [ ] Criar SP para inserir uma garrafa consumida
+- [ ] Criar VIEW para retornar informações de uma garrada consumida
 - [ ] Criar VIEW para mostrar quantidade de garrafas consumidas em 2023, separando por tipo, uva e país
-- [ ] Definir melhor maneira de armazenar as imagens
-- [ ] Criar a tabela de imagem no banco de dados 
-- [ ] Implementar o storage no Azure
+- [ ] Criar banco Sql Server no AWS
+- [ ] Popular banco com garrafas já consumidas
 - [ ] Fazer upload das imagens
