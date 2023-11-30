@@ -51,9 +51,9 @@ O projeto tem como finalidade a implementação de um banco de dados publicado n
 <!-- ROADMAP -->
 ## Roadmap
 ### Fase 01
-- [ ] Projeto do banco
-- [ ] Criação do banco
-- [ ] Criar tabelas e relacionamentos
+- [X] Projeto do banco
+- [X] Criação do banco
+- [X] Criar tabelas e relacionamentos
 - [ ] Criar usuarios. Usuario_1 com permissao de escrita e leitura, Usuario_2 com permissao de leitura  
 - [ ] Popular tabela Estilo_Vinho
 - [ ] Popular tabela Tipo_Vinho
