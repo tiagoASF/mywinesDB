@@ -32,16 +32,6 @@ CREATE TABLE winery
 )
 CREATE INDEX IX_winery_name ON winery(name)
 
-
--- CREATE TABLE style
--- (
---     id TINYINT IDENTITY(1,1),
---     name VARCHAR(20) NOT NULL UNIQUE,
---     CONSTRAINT PK_style PRIMARY KEY(id)
--- )
--- CREATE INDEX IX_estilo_nome ON estilo_vinho(nome)
-
-
 CREATE TABLE style
 (
     id TINYINT IDENTITY(1,1),
@@ -61,63 +51,87 @@ CREATE TABLE grape_variety
 )
 CREATE INDEX IX_grape_name ON grape_variety(name)
 
-------------------------------------------------------------
+CREATE TABLE country
+(
+    id TINYINT IDENTITY(1,1),
+    name VARCHAR(100) UNIQUE NOT NULL,
+    CONSTRAINT PK_country PRIMARY KEY(id)
+)
+CREATE INDEX IX_country_name ON country(name)
 
-CREATE TABLE geographic_location
+CREATE TABLE region
 (
     id SMALLINT IDENTITY(1,1),
-    country VARCHAR(30) NOT NULL,
-    region VARCHAR(30) NOT NULL,
-    subregion VARCHAR(30),
-    coordinates_id INT,
-    CONSTRAINT PK_geographic_location PRIMARY KEY(id),
-    CONSTRAINT FK_geographic_location_coordinates FOREIGN KEY(coordinates_id) 
-        REFERENCES geographic_coordinates(id)
+    name VARCHAR(50) UNIQUE NOT NULL,
+    CONSTRAINT PK_region PRIMARY KEY(id)
 )
-CREATE INDEX IX_geographic_location_country ON geographic_location(country)
-CREATE INDEX IX_geographic_location_region ON geographic_location(region)
-CREATE INDEX IX_geographic_location_subregion ON geographic_location(subregion)
+CREATE INDEX IX_region_name ON region(name)
 
+CREATE TABLE subregion
+(
+    id SMALLINT IDENTITY(1,1),
+    name VARCHAR(50) UNIQUE NOT NULL,
+    CONSTRAINT PK_subregion PRIMARY KEY(id)
+)
+CREATE INDEX IX_subregion_name ON subregion(name)
 
 CREATE TABLE wine_region
 (
     id SMALLINT IDENTITY(1,1),
-    denomination_id SMALLINT UNIQUE, 
-    geographic_location_id SMALLINT NOT NULL,
+    country_id TINYINT NOT NULL,
+    region_id SMALLINT NOT NULL,
+    subregion_id SMALLINT,
+    denomination_id SMALLINT,
+    coordinates_id INT,
     CONSTRAINT PK_wine_region PRIMARY KEY(id),
-    CONSTRAINT FK_wine_region_denomination FOREIGN KEY(denomination_id)
+    CONSTRAINT FK_wine_region_country FOREIGN KEY(country_id) 
+        REFERENCES country(id),
+    CONSTRAINT FK_wine_region_region FOREIGN KEY(region_id) 
+        REFERENCES region(id),
+    CONSTRAINT FK_wine_region_subregion FOREIGN KEY(subregion_id) 
+        REFERENCES subregion(id),
+    CONSTRAINT FK_wine_region_denomination FOREIGN KEY(denomination_id) 
         REFERENCES denomination(id),
-    CONSTRAINT FK_wine_region_geographic_location FOREIGN KEY(geographic_location_id)
-        REFERENCES geographic_location(id)
+    CONSTRAINT FK_wine_region_coordinates FOREIGN KEY(coordinates_id) 
+        REFERENCES geographic_coordinates(id)
 )
 
+CREATE TABLE aging_vessel
+(
+    id TINYINT IDENTITY(1,1),
+    name VARCHAR(30) UNIQUE NOT NULL,
+    description VARCHAR(300),
+    CONSTRAINT PK_aging_vessel PRIMARY KEY(id)
+)
+CREATE INDEX IX_aging_vessel_name ON aging_vessel(name)
 
 CREATE TABLE wine
 (
     id INT IDENTITY(1,1),
     label NVARCHAR(100) NOT NULL,
-    harvest CHAR(4) NOT NULL,
+    harvest_year CHAR(4) NOT NULL,
     abv NUMERIC(3,1) NOT NULL,
-    aging_vessel VARCHAR(20),
+    aging_vessel_id TINYINT NOT NULL,
     grape_variety_id SMALLINT NOT NULL,
     style_id TINYINT NOT NULL,
     wine_region_id SMALLINT NOT NULL,
-    vinicola_id SMALLINT NOT NULL,
-    CONSTRAINT PK_garrafa_vinho PRIMARY KEY(id),
-    CONSTRAINT FK_garrafa_uva FOREIGN KEY(uva_id)
-        REFERENCES uva(id),
-    CONSTRAINT FK_garrafa_tipo FOREIGN KEY(tipo_id)
-        REFERENCES tipo_vinho(id),
-    CONSTRAINT FK_garrafa_estilo FOREIGN KEY(estilo_id)
-        REFERENCES estilo_vinho(id),
-    CONSTRAINT FK_garrafa_regiao FOREIGN KEY(regiao_id)
-        REFERENCES regiao(id),
-    CONSTRAINT FK_garrafa_vinicola FOREIGN KEY(vinicola_id)
-        REFERENCES vinicola(id)
+    winery_id SMALLINT NOT NULL,
+    CONSTRAINT PK_wine PRIMARY KEY(id),
+    CONSTRAINT FK_wine_aging_vessel FOREIGN KEY(aging_vessel_id)
+        REFERENCES aging_vessel(id),
+    CONSTRAINT FK_wine_grape_variety FOREIGN KEY(grape_variety_id)
+        REFERENCES grape_variety(id),
+    CONSTRAINT FK_wine_style FOREIGN KEY(style_id)
+        REFERENCES style(id),
+    CONSTRAINT FK_wine_wine_region FOREIGN KEY(wine_region_id)
+        REFERENCES wine_region(id),
+    CONSTRAINT FK_wine_winery FOREIGN KEY(winery_id)
+        REFERENCES winery(id)
 )
-CREATE INDEX IX_garrafa_rotulo ON garrafa_vinho(rotulo)
-CREATE INDEX IX_garrafa_safra ON garrafa_vinho(safra)
-CREATE INDEX IX_garrafa_alcool ON garrafa_vinho(teor_alcoolico)
+CREATE INDEX IX_wine_label ON wine(label)
+CREATE INDEX IX_wine_harvest_year ON wine(harvest_year)
+CREATE INDEX IX_wine_abv ON wine(abv)
+
 
 
 CREATE TABLE loja
