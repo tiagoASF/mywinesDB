@@ -1,106 +1,107 @@
-CREATE DATABASE mywineDB
+CREATE DATABASE mywinesDB
 GO
 
-USE mywineDB
+USE mywinesDB
 GO
 
-CREATE TABLE denominacao_origem
+CREATE TABLE denomination
 (
     id SMALLINT IDENTITY(1,1),
-    nome VARCHAR(30) NOT NULL UNIQUE,
-    CONSTRAINT PK_denominacao_origem PRIMARY KEY(id)
+    name VARCHAR(30) NOT NULL UNIQUE,
+    CONSTRAINT PK_denomination PRIMARY KEY(id)
 )
-CREATE INDEX IX_denominacao_nome ON denominacao_origem(nome)
+CREATE INDEX IX_denomination ON denomination(name)
 
 
-CREATE TABLE coordenadas_geograficas
+CREATE TABLE geographic_coordinates
 (
     id INT IDENTITY(1,1),
     latitude VARCHAR(50) NOT NULL,
     longitude VARCHAR(50) NOT NULL,
-    CONSTRAINT PK_coordenadas PRIMARY KEY(id)
+    CONSTRAINT PK_coordinates PRIMARY KEY(id)
 )
 
 
-CREATE TABLE vinicola
+CREATE TABLE winery
 (
     id SMALLINT IDENTITY(1,1),
-    nome NVARCHAR(30) NOT NULL UNIQUE,
-    pais_sede VARCHAR(30) NOT NULL,
-    descricao VARCHAR(300),
-    CONSTRAINT PK_vinicola PRIMARY KEY(id)
+    name NVARCHAR(30) NOT NULL UNIQUE,
+    country VARCHAR(30) NOT NULL,
+    description VARCHAR(300),
+    CONSTRAINT PK_winery PRIMARY KEY(id)
 )
-CREATE INDEX IX_vinicola_nome ON vinicola(nome)
+CREATE INDEX IX_winery_name ON winery(name)
 
 
-CREATE TABLE estilo_vinho
+-- CREATE TABLE style
+-- (
+--     id TINYINT IDENTITY(1,1),
+--     name VARCHAR(20) NOT NULL UNIQUE,
+--     CONSTRAINT PK_style PRIMARY KEY(id)
+-- )
+-- CREATE INDEX IX_estilo_nome ON estilo_vinho(nome)
+
+
+CREATE TABLE style
 (
     id TINYINT IDENTITY(1,1),
-    nome VARCHAR(20) NOT NULL UNIQUE,
-    CONSTRAINT PK_estilo_vinho PRIMARY KEY(id)
+    name VARCHAR(20) NOT NULL UNIQUE,
+    CONSTRAINT PK_style PRIMARY KEY(id)
 )
-CREATE INDEX IX_estilo_nome ON estilo_vinho(nome)
+CREATE INDEX IX_style_name ON style(name)
 
 
-CREATE TABLE tipo_vinho
-(
-    id TINYINT IDENTITY(1,1),
-    nome VARCHAR(20) NOT NULL UNIQUE,
-    CONSTRAINT PK_tipo_vinho PRIMARY KEY(id)
-)
-CREATE INDEX IX_tipo_nome ON tipo_vinho(nome)
-
-
-CREATE TABLE uva
+CREATE TABLE grape_variety
 (
     id SMALLINT IDENTITY(1,1),
-    nome VARCHAR(30) NOT NULL UNIQUE,
-    pais_origem VARCHAR(30),
-    caracteristica VARCHAR(500),
-    CONSTRAINT PK_uva PRIMARY KEY(id)
+    name VARCHAR(30) NOT NULL UNIQUE,
+    native_country VARCHAR(30),
+    description VARCHAR(500),
+    CONSTRAINT PK_grape PRIMARY KEY(id)
 )
-CREATE INDEX IX_uva_nome ON uva(nome)
+CREATE INDEX IX_grape_name ON grape_variety(name)
 
+------------------------------------------------------------
 
-CREATE TABLE localizacao
+CREATE TABLE geographic_location
 (
     id SMALLINT IDENTITY(1,1),
-    pais VARCHAR(30) NOT NULL,
-    regiao VARCHAR(30) NOT NULL,
-    subregiao VARCHAR(30),
-    coordenadas_id INT,
-    CONSTRAINT PK_localizacao PRIMARY KEY(id),
-    CONSTRAINT FK_localizacao_coordenadas FOREIGN KEY(coordenadas_id) 
-        REFERENCES coordenadas_geograficas(id)
+    country VARCHAR(30) NOT NULL,
+    region VARCHAR(30) NOT NULL,
+    subregion VARCHAR(30),
+    coordinates_id INT,
+    CONSTRAINT PK_geographic_location PRIMARY KEY(id),
+    CONSTRAINT FK_geographic_location_coordinates FOREIGN KEY(coordinates_id) 
+        REFERENCES geographic_coordinates(id)
 )
-CREATE INDEX IX_localizacao_pais ON localizacao(pais)
-CREATE INDEX IX_localizacao_regiao ON localizacao(regiao)
+CREATE INDEX IX_geographic_location_country ON geographic_location(country)
+CREATE INDEX IX_geographic_location_region ON geographic_location(region)
+CREATE INDEX IX_geographic_location_subregion ON geographic_location(subregion)
 
 
-CREATE TABLE regiao
+CREATE TABLE wine_region
 (
     id SMALLINT IDENTITY(1,1),
-    denominacao_id SMALLINT UNIQUE, 
-    localizacao_id SMALLINT NOT NULL,
-    CONSTRAINT PK_regiao PRIMARY KEY(id),
-    CONSTRAINT FK_regiao_denominacao FOREIGN KEY(denominacao_id)
-        REFERENCES denominacao_origem(id),
-    CONSTRAINT FK_regiao_localizacao FOREIGN KEY(localizacao_id)
-        REFERENCES localizacao(id)
+    denomination_id SMALLINT UNIQUE, 
+    geographic_location_id SMALLINT NOT NULL,
+    CONSTRAINT PK_wine_region PRIMARY KEY(id),
+    CONSTRAINT FK_wine_region_denomination FOREIGN KEY(denomination_id)
+        REFERENCES denomination(id),
+    CONSTRAINT FK_wine_region_geographic_location FOREIGN KEY(geographic_location_id)
+        REFERENCES geographic_location(id)
 )
 
 
-CREATE TABLE garrafa_vinho
+CREATE TABLE wine
 (
     id INT IDENTITY(1,1),
-    rotulo NVARCHAR(100) NOT NULL,
-    safra CHAR(4) NOT NULL,
-    teor_alcoolico NUMERIC(3,1) NOT NULL,
-    estagio_barrica BIT,
-    uva_id SMALLINT NOT NULL,
-    tipo_id TINYINT NOT NULL,
-    estilo_id TINYINT NOT NULL,
-    regiao_id SMALLINT NOT NULL,
+    label NVARCHAR(100) NOT NULL,
+    harvest CHAR(4) NOT NULL,
+    abv NUMERIC(3,1) NOT NULL,
+    aging_vessel VARCHAR(20),
+    grape_variety_id SMALLINT NOT NULL,
+    style_id TINYINT NOT NULL,
+    wine_region_id SMALLINT NOT NULL,
     vinicola_id SMALLINT NOT NULL,
     CONSTRAINT PK_garrafa_vinho PRIMARY KEY(id),
     CONSTRAINT FK_garrafa_uva FOREIGN KEY(uva_id)
