@@ -100,7 +100,7 @@ CREATE TABLE aging_vessel
 (
     id TINYINT IDENTITY(1,1),
     name VARCHAR(30) UNIQUE NOT NULL,
-    description VARCHAR(300),
+    description VARCHAR(500),
     CONSTRAINT PK_aging_vessel PRIMARY KEY(id)
 )
 CREATE INDEX IX_aging_vessel_name ON aging_vessel(name)

@@ -54,9 +54,10 @@ O projeto tem como finalidade a implementação de um banco de dados publicado n
 - [X] Projeto do banco
 - [X] Criação do banco
 - [X] Criar tabelas e relacionamentos
-- [ ] Criar usuarios. Usuario_1 com permissao de escrita e leitura, Usuario_2 com permissao de leitura  
-- [ ] Popular tabela Estilo_Vinho
-- [ ] Popular tabela Tipo_Vinho
+- [X] Criar usuarios. Usuario_1 com permissao de escrita e leitura, Usuario_2 com permissao de leitura  
+- [X] Popular tabela style
+- [X] Popular tabela aging_vessel
+- [X] Popular tabela status
 - [ ] Criar tabela de log Garrafa_Vinho 
 - [ ] Criar tabela de log Garrafa_Adquirida
 - [ ] Criar triggers de log Garrafa_Vinho 
