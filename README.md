@@ -58,10 +58,10 @@ O projeto tem como finalidade a implementação de um banco de dados publicado n
 - [X] Popular tabela style
 - [X] Popular tabela aging_vessel
 - [X] Popular tabela status
-- [ ] Criar tabela de log Garrafa_Vinho 
-- [ ] Criar tabela de log Garrafa_Adquirida
-- [ ] Criar triggers de log Garrafa_Vinho 
-- [ ] Criar triggers de log Tipo_Vinho 
+- [X] Criar tabela de log wine
+- [X] Criar tabela de log acquired_bottle
+- [X] Criar triggers de log wine
+- [X] Criar triggers de log acquired_bottle 
 
 ### Fase 02
 - [ ] Inserir dados das garrafas na adega

@@ -334,3 +334,31 @@ CREATE TABLE bottle_photo
     CONSTRAINT FK_bottle_photo_bottle FOREIGN KEY(acquired_bottle_id)
         REFERENCES acquired_bottle(id)
 )
+
+
+CREATE TABLE LOG_wine
+(
+    wine_id INT NOT NULL,
+    event VARCHAR(10) NOT NULL CHECK(event IN('INSERT', 'UPDATE', 'DELETE')),
+    event_time DATETIME2 NOT NULL,
+    logged_user NVARCHAR(50) NOT NULL,
+    old_data NVARCHAR(1000),
+    new_data NVARCHAR(1000),
+    CONSTRAINT PK_LOG_wine PRIMARY KEY(wine_id, event, event_time),
+    CONSTRAINT FK_LOG_wine FOREIGN KEY(wine_id)
+        REFERENCES wine(id)
+)
+
+
+CREATE TABLE LOG_acquired_bottle
+(
+    acquired_bottle_id INT NOT NULL,
+    event VARCHAR(10) NOT NULL CHECK(event IN('INSERT', 'UPDATE', 'DELETE')),
+    event_time DATETIME2 NOT NULL,
+    logged_user NVARCHAR(50) NOT NULL,
+    old_data NVARCHAR(1000),
+    new_data NVARCHAR(1000),
+    CONSTRAINT PK_LOG_acquired_bottle PRIMARY KEY(acquired_bottle_id, event, event_time),
+    CONSTRAINT FK_LOG_acquired_bottle FOREIGN KEY(acquired_bottle_id)
+        REFERENCES acquired_bottle(id)
+)
