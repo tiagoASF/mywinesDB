@@ -191,7 +191,8 @@ CREATE TABLE social_media
 CREATE TABLE enophile
 (
     id INT IDENTITY(1,1),
-    name NVARCHAR(50) NOT NULL UNIQUE,
+    name NVARCHAR(50) NOT NULL,
+    user_name NVARCHAR(50) NOT NULL UNIQUE,
     email VARCHAR(320) NOT NULL UNIQUE,
     biography NVARCHAR(300),
     birth_date DATE NOT NULL CHECK(YEAR(GETDATE()) - YEAR(birth_date) >= 18),
@@ -225,7 +226,7 @@ CREATE TABLE fraternity
     name NVARCHAR(50) NOT NULL UNIQUE,
     description VARCHAR(300) NOT NULL,
     administrator_id INT NOT NULL,
-    image_id INT NOT NULL,
+    image_id INT,
     created_at DATETIME2 DEFAULT(GETDATE()),
     deactivate_date DATETIME2,
     is_active BIT NOT NULL DEFAULT(1),
