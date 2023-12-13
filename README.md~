@@ -50,10 +50,6 @@ O projeto tem como finalidade a implementação de um banco de dados publicado n
 
 <!-- ROADMAP -->
 ## Roadmap
-
-### Alterações prioritárias
-- [ ] Alterar PK de wine_region. PK deve ser chave composta de country, region, subregion.
-
 ### Fase 01
 - [X] Projeto do banco
 - [X] Criação do banco

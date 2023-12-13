@@ -27,7 +27,7 @@ CREATE TABLE winery
     id SMALLINT IDENTITY(1,1),
     name NVARCHAR(30) NOT NULL UNIQUE,
     country VARCHAR(30) NOT NULL,
-    description VARCHAR(300),
+    description VARCHAR(1000),
     CONSTRAINT PK_winery PRIMARY KEY(id)
 )
 CREATE INDEX IX_winery_name ON winery(name)
@@ -226,7 +226,7 @@ CREATE TABLE fraternity
     name NVARCHAR(50) NOT NULL UNIQUE,
     description VARCHAR(300) NOT NULL,
     administrator_id INT NOT NULL,
-    image_id INT,
+    image_id INT
     created_at DATETIME2 DEFAULT(GETDATE()),
     deactivate_date DATETIME2,
     is_active BIT NOT NULL DEFAULT(1),
@@ -363,3 +363,12 @@ CREATE TABLE LOG_acquired_bottle
     CONSTRAINT FK_LOG_acquired_bottle FOREIGN KEY(acquired_bottle_id)
         REFERENCES acquired_bottle(id)
 )
+
+
+SELECT * FROM aging_vessel
+SELECT * FROM grape_variety
+SELECT * FROM style
+SELECT * FROM denomination
+SELECT * FROM country
+SELECT * FROM region
+SELECT * FROM wine_region
