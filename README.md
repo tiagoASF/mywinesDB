@@ -69,8 +69,9 @@ O projeto tem como finalidade a implementação de um banco de dados publicado n
 
 ### Fase 02
 - [X] Inserir dados das garrafas na adega
-- [ ] Criar VIEW para retornar tabela com o país, região e subregião
-- [ ] Criar VIEW para retornar informações de uma garrada armazenada
+- [X] Criar VIEW para retornar tabela com o país, região e subregião
+- [X] Criar VIEW para retornar informações de uma garrada armazenada
+- [X] Criar VIEW para retornar informações de uma garrada consumida
 - [ ] Criar SP para inserir uma localização (levando em consideração país, região e subregião)
 - [ ] Criar SP para inserir um varietal
 - [ ] Criar SP para inserir uma garrafa adquirida
