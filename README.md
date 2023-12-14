@@ -68,7 +68,7 @@ O projeto tem como finalidade a implementação de um banco de dados publicado n
 - [X] Criar triggers de log acquired_bottle 
 
 ### Fase 02
-- [ ] Inserir dados das garrafas na adega
+- [X] Inserir dados das garrafas na adega
 - [ ] Criar VIEW para retornar tabela com o país, região e subregião
 - [ ] Criar VIEW para retornar informações de uma garrada armazenada
 - [ ] Criar SP para inserir uma localização (levando em consideração país, região e subregião)
