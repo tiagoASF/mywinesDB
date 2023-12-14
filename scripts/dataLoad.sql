@@ -1,57 +1,42 @@
 USE mywinesDB
 GO
 
-INSERT INTO enophile (name, user_name, email, biography, birth_date)
-VALUES
-        ('Tiago Fialho',
-         'Tiago',
-         'tiago.chem@gmail.com',
-         '"Wine improves with age. the older i get, the better I like it."',
-          '1982-03-10'),
-        ('Fabiana Barbosa',
-         'Biazinha',
-         'biazinhaa2@hotmail.com',
-         '"I cook with wine, sometimes I even add it to the food"',
-          '1986-10-26')
 
-
-INSERT INTO fraternity (name, administrator_id)
-VALUES ('Home Sweet Home', 1)
-
-INSERT INTO fraternity_member (fraternity_id, member_id)
-VALUES
-    (2, 1), (2, 3)
 
 
 
 
 INSERT INTO grape_variety(name, native_country, description)
 VALUES(
-  'Touriga Nacional',
-  'Portugal',
-  'An increasingly important red from Portugal that was originally used in Port wines and is now featured in single varietal wines and red blends from the Douro Valley.'
+  'Prosecco',
+  'Italy',
+  'Italy’s number one sparkling wine comes from Northeastern Italy and uses a different winemaking method than Champagne. The best Prosecco wines are noted from the hilly sub-region of Valdobbiadene.'
 )
 
 INSERT INTO denomination(name)
-VALUES ('Vinho Regional Alentejano')
+VALUES ('D.O. Terra Alta')
 
 INSERT INTO country(name)
-VALUES ('Chile')
+VALUES ('Spain')
 
 INSERT INTO region(name)
-VALUES('Alentejo')
+VALUES('Catalonia')
 
 INSERT INTO subregion(name)
-VALUES('')
+VALUES('Terra Alta')
 
 INSERT INTO geographic_coordinates (latitude, longitude)
-VALUES('47.15223', '-1.3467306,17')
+VALUES('-15.8336754', '-48.0093457')
 
 INSERT INTO wine_region (denomination_id, country_id, region_id, subregion_id)
-VALUES (6, 1, 1, null)
+VALUES (null, 12, 104, 102)
+
+UPDATE wine_region
+SET denomination_id = 102
+WHERE id = 104
 
 INSERT INTO winery(name, country, description)
-VALUES ('Arboleda', 'Chile', 'Arboleda, which means a grove of trees, is a tribute to the more than 1,450 hectares (3,583 acres) of native forest that surround its sustainably managed vineyards. Viña Arboleda was founded in 1999 by the Chilean vintner Eduardo Chadwick. The philosophy behind this project is to craft single-vineyard wines that reveal the purest expression of each unique terroir within its vineyards in the Aconcagua Valley.')
+VALUES ('Altavins', 'Spain', 'Our philosophy is simple; Identity, Honesty, Mediterranean Spirit. We take the utmost care when working with the grapes so that we may capture all of their virtues and, with minimum intervention, we harness their potential. What we seek to obtain is excellence in our wines and to extract the essence of this area with them.')
 
 
 INSERT INTO wine (
@@ -64,23 +49,30 @@ INSERT INTO wine (
   wine_region_id,
   winery_id)
 VALUES
-  ( 'Herdade do Rocim',
-    '2021',
-    14.0,
-    6,
-    10,
-    1,
-    13,
-    4
+  ( 'Altavins Almodí Petit Blanc',
+    '2020',
+    13.5,
+    5,
+    3,
+    2,
+    104,
+    106
   )
 
-UPDATE wine
-SET label = 'Herdade do Rocim Touriga Nacional'
-WHERE id = 13
-
-
 INSERT INTO wine_store (name, city, geographic_coordinates_id)
-VALUES('Loja Videiras Carraro', 'Vale dos Vinhedos', null)
+VALUES('Atacadão Dia a Dia', 'Águas Claras', 1002)
+
+INSERT INTO taste_profile
+VALUES(3, 4, 4, 3, 3)
+
+INSERT INTO appraisement(evaluation_date, rating, impressions, taste_profile_id, appraiser_id)
+VALUES(
+  '2023-11-17',
+  3,
+  null,
+  4,
+  1
+)
 
 INSERT INTO acquired_bottle (
   acquired_date,
@@ -97,18 +89,20 @@ INSERT INTO acquired_bottle (
 )
 VALUES
 (
-  '2023-11-15',
-  null,
-  199,
+  '2023-09-15',
+  '2023-11-17',
+  158,
   1,
   0,
   null,
-  13,
-  3,
+  11,
+  2,
   1,
-  null,
+  5,
   1
 )
+
+
 
 
 
