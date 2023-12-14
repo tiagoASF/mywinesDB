@@ -46,7 +46,7 @@ CREATE TABLE grape_variety
     id SMALLINT IDENTITY(1,1),
     name VARCHAR(30) NOT NULL UNIQUE,
     native_country VARCHAR(30),
-    description VARCHAR(500),
+    description VARCHAR(1000),
     CONSTRAINT PK_grape PRIMARY KEY(id)
 )
 CREATE INDEX IX_grape_name ON grape_variety(name)
@@ -363,12 +363,3 @@ CREATE TABLE LOG_acquired_bottle
     CONSTRAINT FK_LOG_acquired_bottle FOREIGN KEY(acquired_bottle_id)
         REFERENCES acquired_bottle(id)
 )
-
-
-SELECT * FROM aging_vessel
-SELECT * FROM grape_variety
-SELECT * FROM style
-SELECT * FROM denomination
-SELECT * FROM country
-SELECT * FROM region
-SELECT * FROM wine_region
